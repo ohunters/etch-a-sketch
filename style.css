@@ -45,3 +45,61 @@
   #root, #__next {
     isolation: isolate;
   }
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-container {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .control-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .control-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .control-button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .reset-button {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .grid-container {
+    width: 800px;
+    height: 800px;
+    border: 1px solid black;
+    margin-top: 2rem;
+  }
