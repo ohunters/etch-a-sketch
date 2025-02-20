@@ -61,34 +61,30 @@
     align-items: center;
   }
 
-  .header-container {
+  .option-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 2rem;
   }
 
-  .control-buttons-container {
+  .option-container-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  .control-buttons {
-    display: flex;
     gap: 1rem;
-    align-items: center;
   }
 
-  .control-button {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+  .size-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
   }
 
-  .reset-button {
+  .size-button {
+    font-size: 2rem;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
@@ -97,9 +93,51 @@
     align-items: center;
   }
 
+  .option-container-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .color-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .color-button {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .option-container-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+
+  .reset-button {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .grid-container {
-    width: 800px;
-    height: 800px;
+    width: 700px;
+    height: 700px;
     border: 1px solid black;
     margin-top: 2rem;
     display: flex;
@@ -110,6 +148,10 @@
     border: 1px solid black;
   }
 
-  .grid-container-square-hover {
+  .grid-container-square-mouseover {
+    background-color: #00000050;
+  }
+
+  .grid-container-square-mousedown {
     background-color: #000000;
   }
