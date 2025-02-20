@@ -12,7 +12,7 @@ let squares = 16;
 const minSquares = 2;
 const maxSquares = 100;
 let isMouseDown = false;
-let isColor = "Black";
+let isColor = "Black"; 
 
 function updateDisplay() {
     gridSquareAmount.textContent = squares;
@@ -37,15 +37,24 @@ function decreaseSquares() {
 }
 
 function isColorBlack() {
-    isColor = "Black"
+    isColor = "Black";
     black.disabled = true;
     color.disabled = false;
 }
 
 function isColorColor() {
-    isColor = "Color"
+    isColor = "Color";
     color.disabled = true;
     black.disabled = false;
+}
+
+function getRandomColor() {
+    let letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 function createGrid() {
@@ -57,20 +66,27 @@ function createGrid() {
         gridContainerSquare.classList.add("grid-container-square");
         gridContainerSquare.style.width = squareSize;
         gridContainerSquare.style.height = squareSize;
+        gridContainerSquare.hoverCount = 0;
 
         gridContainerSquare.addEventListener("mouseover", function () {
-            gridContainerSquare.classList.add("grid-container-square-mouseover");
-            if (isMouseDown) {
-                gridContainerSquare.classList.add("grid-container-square-mousedown");
+            if (isColor === "Color") {
+                gridContainerSquare.style.background = getRandomColor();
+            } else {
+                gridContainerSquare.hoverCount++;
+
+                let opacity = Math.min(gridContainerSquare.hoverCount / 10, 1);
+                gridContainerSquare.style.background = `rgba(0, 0, 0, ${opacity})`;
             }
-        });
-        gridContainerSquare.addEventListener("mouseout", function () {
-            gridContainerSquare.classList.remove("grid-container-square-mouseover");
+
+            if (isMouseDown) {
+                gridContainerSquare.style.background = isColor === "Color" ? getRandomColor() : "black";
+            }
         });
 
         gridContainer.appendChild(gridContainerSquare);
-    }  
+    }
 }
+
 
 function initializeGrid() {
     createGrid();
@@ -87,15 +103,13 @@ function resetGrid() {
 // Initialize grid on page load
 initializeGrid();
 
-// Event listeners for the mouse being presssed
+// Event listeners for mouse press
 document.addEventListener("mousedown", () => {
     isMouseDown = true;
-    console.log("Mouse is down");
 });
 
 document.addEventListener("mouseup", () => {
     isMouseDown = false;
-    console.log("Mouse is up");
 });
 
 // Event listeners
@@ -104,4 +118,3 @@ minus.addEventListener("click", decreaseSquares);
 black.addEventListener("click", isColorBlack);
 color.addEventListener("click", isColorColor);
 resetButton.addEventListener("click", resetGrid);
-
