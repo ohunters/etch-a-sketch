@@ -2,6 +2,7 @@
 let gridSquareAmount = document.querySelector(".grid-square-amount");
 let plus = document.querySelector(".plus");
 let minus = document.querySelector(".minus");
+let resetButton = document.querySelector(".reset-button");
 let gridContainer = document.querySelector(".grid-container");
 
 // Increase or decrease square amount between 2 and 100
@@ -44,7 +45,6 @@ function createGrid() {
     }
 };
 
-
 function initializeGrid() {
     for (let i = 0; i < squares * squares; i++) {
         createGrid();
@@ -52,9 +52,19 @@ function initializeGrid() {
     updateDisplay();
 }
 
+// Reset the grid back to 16x16
+function resetGrid() {
+    squares = 16;
+    createGrid();
+    updateDisplay();
+}
+
+
+
 // Initialize grid on page load
 initializeGrid();
 
 // Event listeners
 plus.addEventListener("click", increaseSquares);
 minus.addEventListener("click", decreaseSquares);
+resetButton.addEventListener("click", resetGrid);
