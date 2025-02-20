@@ -2,6 +2,8 @@
 let gridSquareAmount = document.querySelector(".grid-square-amount");
 let plus = document.querySelector(".plus");
 let minus = document.querySelector(".minus");
+let black = document.querySelector(".black");
+let color = document.querySelector(".color");
 let resetButton = document.querySelector(".reset-button");
 let gridContainer = document.querySelector(".grid-container");
 
@@ -10,6 +12,7 @@ let squares = 16;
 const minSquares = 2;
 const maxSquares = 100;
 let isMouseDown = false;
+let isColor = "Black";
 
 function updateDisplay() {
     gridSquareAmount.textContent = squares;
@@ -33,6 +36,18 @@ function decreaseSquares() {
     }
 }
 
+function isColorBlack() {
+    isColor = "Black"
+    black.disabled = true;
+    color.disabled = false;
+}
+
+function isColorColor() {
+    isColor = "Color"
+    color.disabled = true;
+    black.disabled = false;
+}
+
 function createGrid() {
     gridContainer.innerHTML = "";
     let squareSize = 100 / squares + "%";
@@ -45,18 +60,13 @@ function createGrid() {
 
         gridContainerSquare.addEventListener("mouseover", function () {
             gridContainerSquare.classList.add("grid-container-square-mouseover");
-            if (isMouseDown === true) {
-                gridContainerSquare.addEventListener("mouseover", function () {
-                    gridContainerSquare.classList.add("grid-container-square-mousedown")
-                })
+            if (isMouseDown) {
+                gridContainerSquare.classList.add("grid-container-square-mousedown");
             }
         });
         gridContainerSquare.addEventListener("mouseout", function () {
             gridContainerSquare.classList.remove("grid-container-square-mouseover");
         });
-
-
-
 
         gridContainer.appendChild(gridContainerSquare);
     }  
@@ -77,7 +87,7 @@ function resetGrid() {
 // Initialize grid on page load
 initializeGrid();
 
-
+// Event listeners for the mouse being presssed
 document.addEventListener("mousedown", () => {
     isMouseDown = true;
     console.log("Mouse is down");
@@ -91,5 +101,7 @@ document.addEventListener("mouseup", () => {
 // Event listeners
 plus.addEventListener("click", increaseSquares);
 minus.addEventListener("click", decreaseSquares);
+black.addEventListener("click", isColorBlack);
+color.addEventListener("click", isColorColor);
 resetButton.addEventListener("click", resetGrid);
 
