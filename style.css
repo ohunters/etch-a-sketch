@@ -102,4 +102,10 @@
     height: 800px;
     border: 1px solid black;
     margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .grid-container-square {
+    border: 1px solid black;
   }

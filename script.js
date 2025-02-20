@@ -2,28 +2,59 @@
 let gridSquareAmount = document.querySelector(".grid-square-amount");
 let plus = document.querySelector(".plus");
 let minus = document.querySelector(".minus");
+let gridContainer = document.querySelector(".grid-container");
 
 // Increase or decrease square amount between 2 and 100
 let squares = 16;
+const minSquares = 2;
+const maxSquares = 100;
 
-function increaseSquares () {
-    if (squares < 100) {
-        squares++
-        gridSquareAmount.textContent = squares;
-    } else {
-        plus.disabled = true;
-    };
-};
+function updateDisplay() {
+    gridSquareAmount.textContent = squares;
+    plus.disabled = squares >= maxSquares;
+    minus.disabled = squares <= minSquares;
+}
 
-function decreaseSquares () {
-    if (squares > 2) {
-        squares--
-        gridSquareAmount.textContent = squares;
-    } else {
-        minus.disabled = true;
+function increaseSquares() {
+    if (squares < maxSquares) {
+        squares++;
+        createGrid();
+        updateDisplay();
     }
+}
 
+function decreaseSquares() {
+    if (squares > minSquares) {
+        squares--;
+        createGrid();
+        updateDisplay();
+    }
+}
+
+function createGrid() {
+    gridContainer.innerHTML = "";
+    let squareSize = 100 / squares + "%";
+    for (let i = 0; i < squares * squares; i++) {
+        let gridContainerSquare = document.createElement("div");
+        gridContainerSquare.classList.add("grid-container-square");
+        gridContainerSquare.style.width = squareSize;
+        gridContainerSquare.style.height = squareSize;
+        gridContainer.appendChild(gridContainerSquare);
+
+    }
 };
 
+
+function initializeGrid() {
+    for (let i = 0; i < squares * squares; i++) {
+        createGrid();
+    }
+    updateDisplay();
+}
+
+// Initialize grid on page load
+initializeGrid();
+
+// Event listeners
 plus.addEventListener("click", increaseSquares);
 minus.addEventListener("click", decreaseSquares);
