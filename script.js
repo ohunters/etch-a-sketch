@@ -9,6 +9,7 @@ let gridContainer = document.querySelector(".grid-container");
 let squares = 16;
 const minSquares = 2;
 const maxSquares = 100;
+let isMouseDown = false;
 
 function updateDisplay() {
     gridSquareAmount.textContent = squares;
@@ -35,20 +36,34 @@ function decreaseSquares() {
 function createGrid() {
     gridContainer.innerHTML = "";
     let squareSize = 100 / squares + "%";
+
     for (let i = 0; i < squares * squares; i++) {
         let gridContainerSquare = document.createElement("div");
         gridContainerSquare.classList.add("grid-container-square");
         gridContainerSquare.style.width = squareSize;
         gridContainerSquare.style.height = squareSize;
-        gridContainer.appendChild(gridContainerSquare);
 
-    }
-};
+        gridContainerSquare.addEventListener("mouseover", function () {
+            gridContainerSquare.classList.add("grid-container-square-mouseover");
+            if (isMouseDown === true) {
+                gridContainerSquare.addEventListener("mouseover", function () {
+                    gridContainerSquare.classList.add("grid-container-square-mousedown")
+                })
+            }
+        });
+        gridContainerSquare.addEventListener("mouseout", function () {
+            gridContainerSquare.classList.remove("grid-container-square-mouseover");
+        });
+
+
+
+
+        gridContainer.appendChild(gridContainerSquare);
+    }  
+}
 
 function initializeGrid() {
-    for (let i = 0; i < squares * squares; i++) {
-        createGrid();
-    }
+    createGrid();
     updateDisplay();
 }
 
@@ -59,12 +74,22 @@ function resetGrid() {
     updateDisplay();
 }
 
-
-
 // Initialize grid on page load
 initializeGrid();
+
+
+document.addEventListener("mousedown", () => {
+    isMouseDown = true;
+    console.log("Mouse is down");
+});
+
+document.addEventListener("mouseup", () => {
+    isMouseDown = false;
+    console.log("Mouse is up");
+});
 
 // Event listeners
 plus.addEventListener("click", increaseSquares);
 minus.addEventListener("click", decreaseSquares);
 resetButton.addEventListener("click", resetGrid);
+
